@@ -1,0 +1,40 @@
+.not-found {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.not-found__title {
+  margin: 0;
+  padding: 246px 0 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169.43px;
+}
+
+.not-found__paragraph {
+  margin: 0;
+  padding: 5px 0 184px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.36px;
+}
+
+.not-found__link {
+  margin: 0;
+  padding: 0;
+  color: #4285F4;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.94px;
+  text-decoration: none;
+}
+
+.not-found__link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
