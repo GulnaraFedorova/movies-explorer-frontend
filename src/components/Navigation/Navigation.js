@@ -9,11 +9,12 @@ function Navigation({ isNavigationOpen }) {
   return (
     <nav className={`navigation ${isNavigationOpen && "navigation_opened"}`}>
       <ul className={`navigation__list ${isNavigationOpen && "navigation__list_opened"}`}>
-        <li className="navigation__item navigation__item_sidebar">
+        <li className="navigation__sidebar">
           <NavLink 
               to="/" 
               className={({ isActive }) => isActive ? `navigation__link navigation__link_active` : `navigation__link` 
               }>
+                Главная
           </NavLink>
         </li>
         <li>

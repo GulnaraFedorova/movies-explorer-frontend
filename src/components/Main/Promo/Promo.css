@@ -29,3 +29,26 @@
   letter-spacing: -0.04em;
   align-items: center; 
 }
+
+@media screen and (max-width: 768px) {
+  .promo {
+    min-height: 784px;
+    padding: 0;
+    background-position: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .promo {
+    min-height: 570px;
+    background-size: 248px 248px;
+    background-position: 50% 45%;
+  }
+
+  .promo__title {
+    font-size: 31px;
+    line-height: 39px;
+    letter-spacing: -0.04em;
+    padding: 0 10px;
+  }
+} 

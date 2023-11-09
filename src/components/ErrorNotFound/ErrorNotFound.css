@@ -38,3 +38,33 @@
   opacity: 0.7;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .not-found__title {
+    margin: 0;
+    padding: 409px 0 0;
+  }
+  
+}
+
+@media screen and (max-width: 320px) {
+  .not-found__title {
+    padding-top: 329px;
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .not-found__paragraph {
+    padding: 10px 0 184px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .not-found__link {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 12px;
+    line-height: 14.52px;
+  }
+}

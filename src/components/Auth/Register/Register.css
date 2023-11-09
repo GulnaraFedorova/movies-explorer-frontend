@@ -62,7 +62,8 @@
 }
 
 .register__input:focus {
-  outline: none;
+  outline: groove;
+  opacity: 0.7;
 }
 
 .register__error {
@@ -123,4 +124,58 @@
 .register__confirmation_link:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .register {
+    margin: 0 auto;
+    padding: 230px 3px 67px;
+  }
+}
+
+
+@media screen and (max-width: 444px) {
+  .register {
+    margin: 0 auto;
+    padding: 55px 30px 67px;
+  }
+
+  .register__logo {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0)    
+  }
+
+  .register__title {
+    padding-top: 88px;
+    text-align: center;
+  }
+
+  .register__form {
+    margin: 0;
+    padding: 60px 0 0;
+  }
+
+  .register__confirmation-container {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+  }
+
+  .register__confirmation {
+    font-size: 12px;
+    line-height: 14.5px;
+  }
+
+  .register__button {
+    position: absolute;
+    bottom: 102px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 260px;
+    font-size: 12px;
+    line-height: 14.5px;
+  }
 }

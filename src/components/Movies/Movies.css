@@ -31,3 +31,21 @@
   opacity: 0.8;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .movies {
+    padding: 60px 30px 40px;
+  }
+
+  .movies__button {
+    padding: 0;
+    margin: 68px 0 80px;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .movies {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

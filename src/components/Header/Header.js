@@ -9,6 +9,10 @@ function Header({ loggedIn }) {
 
   const location = useLocation();
 
+  const onClickBurger = () => {
+    setNavigationOpen(!isNavigationOpen);
+  };
+
   return location.pathname === '/' || location.pathname === '/movies' || location.pathname === '/saved-movies' || location.pathname === '/profile' ? (
     <header className={`header ${!loggedIn ? 'header_color_blue' : ''}`}>
       <Link to='/' className="header__link">
@@ -17,7 +21,8 @@ function Header({ loggedIn }) {
       {loggedIn
         ? <>
           <Navigation isNavigationOpen={isNavigationOpen} />
-          <button className={`header__menu`}/>
+          <button className={`header__menu ${isNavigationOpen && "header__menu_opened"}`}
+                    onClick={onClickBurger}/>
         </>
         : <ul className="header__authorized">
             <li>

@@ -61,3 +61,19 @@
   -ms-transform: translateX(20px);
   transform: translateX(20px);
 }
+
+@media screen and (max-width: 768px) {
+  .filter-checkbox {
+    padding-bottom: 52px;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .filter-checkbox {
+    padding-bottom: 51px;
+  }
+  
+  .filter-checkbox__paragraph {
+    font-size: 11px;
+  }
+}

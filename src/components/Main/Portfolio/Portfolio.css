@@ -60,3 +60,46 @@
   letter-spacing: -0.04em;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 91px 0 90px 0;
+  }
+  .portfolio__paragraph {
+    font-size: 28px;
+    line-height: 50px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .portfolio__paragraph {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .portfolio {
+    padding: 70px 0 70px;
+  }
+
+  .portfolio__subtitle {
+    margin-bottom: 40px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__link {
+    height: 28px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__arrow {
+    position: absolute;
+    right: 2.5px;
+    top: 2px;
+    font-size: 18px;
+    letter-spacing: -0.04em;
+  }
+}

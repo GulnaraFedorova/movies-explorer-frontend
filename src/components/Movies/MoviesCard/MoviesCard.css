@@ -26,6 +26,7 @@
   height: 203px;
   object-position: center;
   object-fit: cover;
+  border-radius: 6px;
 }
 
 .movies-card__title {
@@ -98,4 +99,30 @@
   line-height: 13px;
 }
 
+@media screen and (max-width: 768px) {
+  .movies-card {
+    max-width: 339px;
+    height: 262px;
+    margin: 0 auto;
+  }
+  .movies-card__img {
+    max-width: 339px;
+    height: 190px;
+  }
+} 
 
+@media screen and (max-width: 320px) {
+  .movies-card {
+    height: 237px;
+  }
+
+  .movies-card__container {
+    margin: 0;
+    padding: 14px 16px 0px;
+  }
+
+  .movies-card__img {
+    max-width: 300px;
+    height: 168px;
+  }
+} 

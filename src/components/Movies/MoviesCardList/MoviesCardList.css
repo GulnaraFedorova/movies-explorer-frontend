@@ -8,3 +8,17 @@
   width: 100%;
   list-style-type: none;
 }
+
+@media screen and (max-width: 768px) {
+  .movies-card__list {
+    gap: 31px 24px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .movies-card__list {
+    margin: 0px 0 10px;
+    padding: 50px 0 0;
+    gap: 14px 0px;
+  }
+}
