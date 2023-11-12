@@ -1,0 +1,149 @@
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 74px;
+  box-sizing: border-box;
+  position: relative;
+} 
+
+.header__logo {
+  margin: 0 0 0 70px;
+  padding: 3px 0;
+  height: 38px;
+  width: 38px;
+} 
+
+.header_color_blue {
+  background-color: #073042;
+}
+
+.header__authorized {
+  display: flex;
+  position: absolute;
+  right: 70px;
+  align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header__authorized li {
+  margin-right: 30px;
+}
+
+.header__authorized li:last-of-type {
+  margin-right: 0;
+}
+
+.header__link {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.header__link:hover {
+  opacity: 0.7;
+}
+
+.header__link_login {
+  display: flex;
+  justify-content: center;
+  padding: 8px 20px;
+  background-color: #3ddc84;
+  color: #000000;
+  border-radius: 3px;
+}
+
+.header__link_login:hover {
+  opacity: 0.8;
+}
+
+.header__menu {
+  z-index: 1;
+  display: none;
+}
+
+.header__menu:hover {
+  opacity: 0.8;
+}
+
+
+@media screen and (max-width: 768px) {
+  .header__logo {
+    margin: 0 0 0 30px;;
+  }
+
+  .header__authorized {
+   right: 30px;
+  }
+
+  .header__menu {
+    display: block;
+    position: absolute;
+    right: 30px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity ease-in-out .2s;
+    border: none;
+    background: url('../../images/icon__COLOR_icon-main.svg') center no-repeat;
+    background-size: cover;
+  }
+
+  .header__menu_opened {
+    position: absolute;
+    background: url('../../images/closeburger.svg') center no-repeat;
+    width: 22px;
+    height: 22px;
+    top: 26px;
+    right: 26px;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .header__logo {
+    margin: 0 0 0 14px;
+  }
+
+  .header__authorized {
+   right: 14px;
+  }
+
+  .header__link {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .header__authorized li {
+    margin-right: 15px;
+  }
+  
+  .header__authorized li:last-of-type {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 444px) {
+  .header__authorized-user li:last-of-type {
+    margin-right: 0;
+  }
+
+  .header__menu {
+    right: 14px;
+    width: 40px;
+    height: 43px;
+  }
+
+  .header__menu_opened {
+    top: 10px;
+    right: 10px ;
+  }
+}
