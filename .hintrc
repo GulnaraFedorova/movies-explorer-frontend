@@ -7,7 +7,8 @@
       "default",
       {
         "ignore": [
-          "-moz-text-size-adjust"
+          "-moz-text-size-adjust",
+          "user-select"
         ]
       }
     ]

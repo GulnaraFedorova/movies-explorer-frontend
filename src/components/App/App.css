@@ -1,8 +1,4 @@
 .app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-flow: column;
   margin: 0 auto;
   box-sizing: border-box;
   max-width: 1280px;
@@ -17,4 +13,15 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+}
+
+.app__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.app_color_blue {
+  background-color: #073042;
 }

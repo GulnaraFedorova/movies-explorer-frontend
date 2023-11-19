@@ -1,24 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SearchForm.css";
 
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm() {
+function SearchForm({ onSubmit, keyword, setKeyword, isShort, setIsShort }) {
+  const [missingKeywordErrMessage, setMissingKeywordErrMessage] = useState('');
+
+  function handleSearch(event) {
+    event.preventDefault();
+    if (keyword) {
+      setMissingKeywordErrMessage(false);
+      onSubmit();
+    } else {
+      setMissingKeywordErrMessage(true);
+    }
+  };
+
   return (
-    <form className="search-form">
-      <div className="search__container">
+    <form name="search" className=" search-form" noValidate onSubmit={handleSearch}>
+      <div className="search-form__container">
         <input 
-          id="search"
-          className="search__input"
-          placeholder="Фильм"
+          className="search-form__input" 
           name="search"
-          autoComplete="off"
+          placeholder="Фильм"
           type="text"
+          autoComplete="off"
+          value={keyword || ""}
+          onChange={(event) => setKeyword(event.target.value)}
           required
         />
-        <button type="submit" className="search__button"></button>
+        {missingKeywordErrMessage && (
+          <span className='search__input-error'>
+            Необходимо ввести ключевое слово
+          </span>
+      )}
+        <button type="submit" className="search-form__button"></button>
       </div>
-      <FilterCheckbox />
+      <FilterCheckbox isShort={isShort} setIsShort={setIsShort}>Короткометражки</FilterCheckbox>
     </form>
   );
 }

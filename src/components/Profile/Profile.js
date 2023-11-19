@@ -1,94 +1,157 @@
-import React, { useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import './Profile.css';
-import { useNavigate } from 'react-router-dom';
+import useFormValidation from '../../hooks/useFormValidation';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+import AuthForm from '../AuthForm/AuthForm';
 
-function Profile() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const navigate = useNavigate();
-  const [editProfileData, setEditProfileData] = useState(false);
-  const handleChangeName = (event) => setName(event.target.value);
-  const handleChangeEmail = (event) => setEmail(event.target.value);
+function Profile({ isFormSaved, onUpdateUser, signtOut }) {
 
-  const handleSaveClick = (e) => {
+  const currentUser = useContext(CurrentUserContext);
+  const [isDataChanged, setIsDataChanged] = useState(true);
+  const [isModifying, setModifying] = useState(false);
+  const { values, errors, isFormValid, onChange, resetValidation } =
+    useFormValidation();
+
+  useEffect(() => {
+    currentUser.name !== values.name || currentUser.email !== values.email
+      ? setIsDataChanged(false)
+      : setIsDataChanged(true);
+  }, [currentUser, values]);
+
+  useEffect(() => {
+    resetValidation(false, currentUser);
+  }, [resetValidation, currentUser]);
+
+  function handleEditClick() {
+    setModifying(!isModifying);
+  }
+
+  function handleSubmit(e) {
     e.preventDefault();
-    setEditProfileData(false);
-  };
+    onUpdateUser(values);
+  }
 
-  const handleEditClick = (e) => {
-    e.preventDefault();
-    setEditProfileData(true);
-  };
-
-  const handleLogoutClick = (e) => {
-    e.preventDefault();
-    navigate('/');
-  };
-  
   return (
     <section className="profile">
       <div className="profile__container">
-        <h1 className="profile__title">Привет, Виталий!</h1>
-        <form 
-          className="profile__form" 
-          onSubmit={handleSaveClick}>
-          <fieldset className="profile__fieldset">
-            <div className="profile__input-container">
-            <label className="profile__input-label">Имя</label>
-              <input
-                id="name-input"
-                className="profile__input profile__input_name"
-                type="name"
-                placeholder="Виталий"
-                value={name}
-                onChange={handleChangeName}
-                minLength="2"
-                maxLength="30"
-                required />
+        <h1 className="profile__title">{`Привет, ${currentUser.name || ""}!`}</h1>
+        <AuthForm
+          name="profile" 
+          onSubmit={handleSubmit}
+          isFormValid={isFormValid}
+          isDataChanged={isDataChanged}
+          isModifying={isModifying}
+        >
+          <label className="form__input-label form__input-label_type_profile">
+            Имя
+            <input
+              id="name-input"
+              className={`form__input form__input_type_profile ${
+                errors.name ? "form__input_incorrect" : ""
+              }`}
+              type="text"
+              name="name"
+              form="profile"
+              required
+              autoComplete="off"
+              minLength="2"
+              maxLength="30"
+              pattern={"^[A-Za-zА-Яа-яЁё\\-\\s]+$"}
+              readOnly={!isModifying && true}
+              onChange={onChange}
+              value={values.name || ""}
+            />
+          </label>
+          <label className="form__input-label form__input-label_type_profile">
+            E-mail
+            <input
+              className={`form__input form__input_type_profile ${
+                errors.email ? "form__input_incorrect" : ""
+              }`}
+              type="text"
+              name="email"
+              form="profile"
+              required
+              id="email-input"
+              readOnly={!isModifying && true}
+              onChange={onChange}
+              value={values.email || ""}
+            />
+          </label>
+          <div
+            className={`form__errors-container ${
+              errors.name || errors.email ? "form__errors-container_active" : ""
+            }`}
+          >
+            <div className="form__error-container">
+              <p
+                className={`form__error-name ${
+                  errors.name ? "form__error-name_active" : ""
+                }`}
+              >
+                Имя:
+              </p>
+              <span
+                className={`form__input-error form__input-error_type_profile ${
+                  errors.name ? "form__input-error_active" : ""
+                }`}
+              >
+                {errors.name || ""}
+              </span>
             </div>
-            <div className="profile__input-container">
-            <label className="profile__input-label">E-mail</label>
-              <input
-                id="email-input"
-                className="profile__input profile__input_email"
-                type="email"
-                placeholder="pochta@yandex.ru"
-                value={email}
-                onChange={handleChangeEmail}
-                name="email"
-                minLength="6"
-                maxLength="30"
-                required />
+            <div className="form__error-container">
+              <p
+                className={`form__error-name ${
+                  errors.email ? "form__error-name_active" : ""
+                }`}
+              >
+                E-mail:
+              </p>
+              <span
+                className={`form__input-error form__input-error_type_profile ${
+                  errors.email ? "form__input-error_active" : ""
+                }`}
+              >
+                {errors.email || ""}
+              </span>
             </div>
-            <div className="profile__button-container">
-              {editProfileData ?
-                <button
-                  className="profile__button profile__button_submit"
-                  type="submit"
-                  onClick={handleSaveClick}>
-                  Сохранить
-                </button>
-                :
-                <>
-                  <button
-                    className="profile__button profile__button_edit"
-                    type="button" 
-                    onClick={handleEditClick}>
-                    Редактировать
-                  </button>
-                  <button
-                    className="profile__button profile__button_logout"
-                    type="button"
-                    onClick={handleLogoutClick}>
-                    Выйти из аккаунта
-                  </button>
-                </>
-              }
-            </div>
-          </fieldset>
-        </form>
+          </div>
+          <button
+          className={`form__button-submit form__button-submit_type_profile ${
+            !isModifying
+            ? "form__button-submit_hidden"
+            : 
+            (!isFormValid || isFormSaved || isDataChanged) && 
+            "form__button-submit_disabled"} button`}
+          type="submit"
+          isFormValid={isFormValid}
+          isFormSaved={isFormSaved}
+        >
+          {isFormSaved ? "Сохранение..." : "Сохранить"}
+        </button>
+        </AuthForm>
+        <div
+          className={`profile__edit ${
+            isModifying ? "profile__edit_hidden" : ""
+          }`}
+        >
+          <button
+            className="profile__button profile__button_submit"
+            type="button"
+            onClick={handleEditClick}
+          >
+            Редактировать
+          </button>
+          <button
+            className="profile__button profile__button_logout"
+            type="button"
+            onClick={signtOut}
+          >
+            Выйти из аккаунта
+          </button>
+        </div>
       </div>
-   </section>   
+    </section>
   );
 }
 

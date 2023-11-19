@@ -1,9 +1,7 @@
 import React from 'react';
 import './Navigation.css';
-
 import { NavLink } from "react-router-dom";
 import profileLogo from "../../images/profile-logo.svg";
-
 function Navigation({ isNavigationOpen }) {
 
   return (
@@ -34,7 +32,9 @@ function Navigation({ isNavigationOpen }) {
           </NavLink>
         </li>
         <li className='navigation__link_container'>
-          <NavLink className="navigation__link navigation__link_profile" to="/profile"
+          <NavLink 
+            to="/profile" 
+            className="navigation__link navigation__link_profile"
             >
               Аккаунт
             <img className='navigation__link_img' src={profileLogo} alt="Лого"/>

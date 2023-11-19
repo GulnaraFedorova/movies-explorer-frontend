@@ -4,12 +4,15 @@ import './index.css';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
+import { MoviesProvider } from './contexts/MoviesContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+    <MoviesProvider>
+        <App/>
+    </MoviesProvider> 
     </BrowserRouter>
   </React.StrictMode>
 );

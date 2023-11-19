@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
+  background-color: #202020;
 }
 
 .not-found__title {
@@ -32,6 +33,8 @@
   font-size: 14px;
   line-height: 16.94px;
   text-decoration: none;
+  background-color: #202020;
+  border: none;
 }
 
 .not-found__link:hover {
