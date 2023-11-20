@@ -131,7 +131,7 @@
   display: block;
   width: 100% 
 }
-.orm__button-submit:hover {
+.form__button-submit:hover {
   opacity: 0.8;
   cursor: pointer;
 }

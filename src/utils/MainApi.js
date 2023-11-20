@@ -56,17 +56,14 @@ class MainApi {
     }).then(this._checkResponse);
   }
  
-  editUserData(data, token) {
+  editUserData({ email, name }, token) {
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-      }),
+      body: JSON.stringify({ email, name }),
     })
     .then(this._checkResponse);
   };

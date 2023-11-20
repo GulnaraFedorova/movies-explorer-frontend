@@ -122,7 +122,7 @@ function Profile({ isFormSaved, onUpdateUser, signtOut }) {
             ? "form__button-submit_hidden"
             : 
             (!isFormValid || isFormSaved || isDataChanged) && 
-            "form__button-submit_disabled"} button`}
+            "form__button-submit_disabled"}`}
           type="submit"
           isFormValid={isFormValid}
           isFormSaved={isFormSaved}

@@ -61,7 +61,6 @@ function App() {
           }
           setCurrentUser((prev) => ({...prev, name: data.name, email: data.email}))
           setLoggedIn(true);
-          navigate("/");
         })
         .catch((err) => {
           console.error(err);
@@ -80,48 +79,33 @@ function App() {
     setInfoTooltip({ ...infoTooltip, isOpen: false });
   }
 
-  const handleRegister = (email, password, name) => {
+  const handleRegister = ({email, password, name}) => {
     setIsFormSaved(true)
     mainApi
-      .userRegistration(email, password, name)
-      .then(() => {
-        handleLogin({email, password});
-        setLoggedIn(true);
-        setInfoTooltip({
-          message: "Вы успешно зарегистрировались!",
-          isOpen: true,
-          success: true,
+      .userRegistration({email, password, name})
+      .then((data) => {
+        if (data) {
+          handleLogin({email, password});
+          setLoggedIn(true);
+          setInfoTooltip({
+            message: "Вы успешно зарегистрировались!",
+            isOpen: true,
+            success: true,
         });
-        navigate("/signin", { replace: true });
+        navigate('/signin', { replace: true });
+      }
       })
-    .catch((err) => {
-      if (err.statusCode === 409) {
+      .catch((err) => {
+        console.log(err)
         setInfoTooltip({
-          message: 'Пользователь с указанным email уже существует',
+          message: 'При регистрации произошла ошибка',
           isOpen: true,
           success: false,
         })
         return false;
-      }
-      if (err.statusCode === 400) {
-        setInfoTooltip({
-          message: 'При авторизации пользователя произошла ошибка',
-          isOpen: true,
-          success: false,
-        })
-        return false;
-      }
-      if (err.statusCode === 500) {
-        setInfoTooltip({
-          message: `На сервере произошла ошибка`,
-          isOpen: true,
-          success: false,
-        })
-        return false;
-      }
-    })
-    .finally(() => setIsFormSaved(false))
-  }
+      })
+      .finally(() => setIsFormSaved(false))
+  } 
 
   const handleLogin = (email, password) => {
     setIsFormSaved(true)
@@ -139,26 +123,9 @@ function App() {
         navigate('/movies', {replace: true});
     })
     .catch((err) => {
-      setIsFormSaved(true)
-      if (err.statusCode === 401) {
+      if (err) {
         setInfoTooltip({
-          message: 'Введен неправильный логин или пароль',
-          isOpen: true,
-          success: false,
-        })
-        return false;
-      }
-      if (err.statusCode === 400) {
-        setInfoTooltip({
-          message: 'При авторизации пользователя произошла ошибка',
-          isOpen: true,
-          success: false,
-        })
-        return false;
-      }
-      if (err.statusCode === 500) {
-        setInfoTooltip({
-          message: `На сервере произошла ошибка`,
+          message: 'При авторизации произошла ошибка',
           isOpen: true,
           success: false,
         })
@@ -166,15 +133,15 @@ function App() {
       }
     })
     .finally(() => setIsFormSaved(false))
-  };
+  } 
 
-  function handleUpdateUser(data) {
+  function handleUpdateUser(userData) {
     const jwt = localStorage.getItem("jwt");
     setIsFormSaved(true);
     mainApi
-      .editUserData(data, jwt)
-      .then((res) => {
-        setCurrentUser(res);
+      .editUserData(userData, jwt)
+      .then((editUserData) => {
+        setCurrentUser(editUserData);
         setInfoTooltip({
           message: 'Данные пользователя успешно обновлены',
           isOpen: true,
@@ -182,14 +149,7 @@ function App() {
         });
       })
       .catch((err) => {
-        if (err.statusCode === 409) {
-          setInfoTooltip({
-            message: 'Пользователь с указанным email уже существует',
-            isOpen: true,
-            success: false,
-          })
-          return false;
-        } else {
+        if (err) {
           setInfoTooltip({
             message: 'При обновлении профиля произошла ошибка',
             isOpen: true,
@@ -202,9 +162,10 @@ function App() {
   } 
 
   function signtOut() {
-    localStorage.removeItem("jwt");
-    navigate("/signin");
-    setCurrentUser("");
+    localStorage.clear();
+    setLoggedIn(false);
+    setCurrentUser(() => ({name: '', email: ''}));
+    navigate('/');
   }
 
   useEffect(() => {
@@ -212,20 +173,11 @@ function App() {
     mainApi
       .getSavedMovies(jwt)
       .then((savedMovies) => setSavedMovies(savedMovies))
-      .catch((err) => {
-        if (err.statusCode === 500) {
-          setInfoTooltip({
-            message: `На сервере произошла ошибка`,
-            isOpen: true,
-            success: false,
-          })
-          return false;
-        }
-      })
+      .catch((err) => (err));
     if (moviesState) {
       restoreState(moviesState);
     }
-  }, []);
+  },[]);
 
   function handleSearchMovies() {
     if (movies.length === 0) {
@@ -237,7 +189,7 @@ function App() {
           setMovies(movies);
         })
         .catch((err) => {
-          if (err.statusCode === 500) {
+          if (err) {
             setInfoTooltip({
               message: `На сервере произошла ошибка`,
               isOpen: true,
