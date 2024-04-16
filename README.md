@@ -10,9 +10,9 @@
 - Реализованы возможности авторизации и регистрации пользователей, операции с фильмами и пользователями.
 - Отображена вёрстка на разрешениях, предусмотренных макетами.
 
-Mакет версия dark-3
+Mакет версия dark-3  
 Адрес репозитория: https://github.com/GulnaraFedorova/movies-explorer-frontend
 
 ## Ссылки на проект:
-Frontend https://melograno.nomoredomainsrocks.ru
+Frontend https://melograno.nomoredomainsrocks.ru  
 Backend https://api.melograno.nomoredomainsrocks.ru
